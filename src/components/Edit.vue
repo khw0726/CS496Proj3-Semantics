@@ -60,7 +60,7 @@ let apiCall = function (type, contents) {
 }
 export default {
   name: 'edit',
-  props: ['diary', 'onSubmit'],
+  props: ['diary', 'onSubmit', 'token'],
   data: function () {
     return ({
       newEntry: {
@@ -69,13 +69,15 @@ export default {
         keywords: '',
         sentiment: -1,
         date: '',
-        response: ''
+        response: '',
+        token: ''
       }
     })
   },
   methods: {
     addEntry () {
       this.newEntry.date = Date()
+      this.newEntry.token = this.token
       // contents = this.newEntry.contents
       // let xhr = new XMLHttpRequest()
       // xhr.open('POST', 'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases', false)

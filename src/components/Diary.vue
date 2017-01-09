@@ -7,14 +7,14 @@
         <h2 class="ui right floated sub header">{{dateStr()}}</h2>        
       </div>
       <br>
-      <div class="ui contents">
+      <div class="ui contents diary">
         <p>{{myArticle.contents}}</p>
       </div>
       
       <h6 class="ui icon header">
         <i class="left quote icon"/>
       </h6>
-      <div class="ui contents">
+      <div class="ui contents response">
         <p>{{ myArticle.keywords}} {{ myArticle.sentiment }}</p>
       </div>
       <div class="ui divider"/>
@@ -66,11 +66,15 @@
   }
 </script>
 
-<!--<style>
-.contents{
+<style>
+#app .ui.contents.diary {
   text-indent: '4em';
-  font: 'Consolas';
+  /*font: 'Consolas';
   margin-top: '20em';
+  color: darkslategray;*/
+}
+#app .ui.contents.response {
+  text-indent: '4em';
   color: darkslategray;
 }
-</style>-->
+</style>

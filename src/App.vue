@@ -25,14 +25,16 @@
         <!--<a class="item" id="menu-read" v-on:click="loadArticle()"><i class="file text outline icon"/>Read</a>-->
         <a class="item" :class="{ active: status == 'write' }" v-on:click="status = 'write'" ><i class="write icon"/>Write</a>
         <a class="item" :class="{ active: status == 'stats' }" v-on:click="status = 'stats'" ><i class="line chart icon"/>Stats</a>
+        <a class="item" :class="{ active: status == 'options' }" v-on:click="status = 'options'" ><i class="options icon"/>Options</a>
         <a class="item" @click="onSignOutClick()"><i class="sign out icon" /> Sign Out</a>
       <!--</div>-->
     </div>
     <div class="ui text container" id="app">
       <h1 class = "ui dividing header">Just a small diary</h1>
-      <List v-if="status == 'list'" :items="diary" :on-item-click="loadArticle"></List>
+      <List v-if="status == 'list'" :items="getDiaryList(diary)" :on-item-click="loadArticle"></List>
       <Diary v-else-if="status == 'read'" :my-article="targetArticle" :remove-article="removeArticle" :token="token" :secret="secret"></Diary>
-      <Edit v-else-if="status == 'write'" :diary="diary" :onSubmit="addEntry"></Edit>
+      <Edit v-else-if="status == 'write'" :diary="diary" :onSubmit="addEntry" :token="this.token"></Edit>
+      <!--<Options v-else-if="status == 'options'" ></Options>-->
       <MyChart v-else-if="status == 'stats'" :chart-data="chartData" :options="null"></MyChart>
     </div>
   </div>
@@ -69,7 +71,7 @@ export default {
     MyChart
   },
   firebase: {
-    diary: diaryRef
+    diary: diaryRef.orderByChild('date')
   },
   data: function () {
     return ({
@@ -98,6 +100,17 @@ export default {
   },
   watch: {
     diary: function () {
+      this.dates = this.getDates()
+      this.sentiments = this.getSentiments()
+      this.chartData = {
+        labels: this.dates,
+        datasets: [{
+          label: 'Sentiments',
+          data: this.sentiments
+        }]
+      }
+    },
+    token: function () {
       this.dates = this.getDates()
       this.sentiments = this.getSentiments()
       this.chartData = {
@@ -153,14 +166,27 @@ export default {
       this.targetArticle.date = ''
     },
     getDates () {
-      return this.diary.map(function (diary) {
+      let token = this.token
+      return this.diary.filter(function (diary) {
+        return diary.token === token
+      }).map(function (diary) {
         let a = new Date(diary.date)
         return a.toLocaleString('en-US')
       })
+      // this.diary.filter(function(val) { return val !== null })
     },
     getSentiments () {
-      return this.diary.map(function (diary) {
+      let token = this.token
+      return this.diary.filter(function (diary) {
+        return diary.token === token
+      }).map(function (diary) {
         return diary.sentiment
+      })
+    },
+    getDiaryList () {
+      let token = this.token
+      return this.diary.filter(function (diary) {
+        return diary.token === token
       })
     },
     onSignInClick () {

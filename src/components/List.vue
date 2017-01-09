@@ -2,8 +2,8 @@
   <div>
     <div class="ui relaxed divided list">
       <div v-for="item in items" role="presentation" class="item">
-        <a href="#" v-on:click="onItemClick(item)" class="header"> {{ item.title }}</a>
-        <div class="content">{{ getDate(item) }}</div>
+        <h3 class="ui header"><a href="#" v-on:click="onItemClick(item)" class="header"> {{ item.title }}</a></h3>
+        <div class="right floated content">{{ getDate(item) }}</div>
       </div>
     </div>
   </div>
