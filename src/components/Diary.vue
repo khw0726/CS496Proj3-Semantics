@@ -15,12 +15,12 @@
         <i class="left quote icon"/>
       </h6>
       <div class="ui contents response">
-        <p>{{ myArticle.keywords}} {{ myArticle.sentiment }}</p>
+        <pre><p>{{ myArticle.response }}</p></pre>
       </div>
       <div class="ui divider"/>
 
       <button class="ui right floated labeled icon basic blue button" v-on:click="retweet(myArticle.contents, myArticle.response)">
-        <i class="twitter icon"></i> Retweet
+        <i class="twitter icon"></i> Tweet
       </button>
       <br>
   </div>
