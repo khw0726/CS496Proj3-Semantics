@@ -68,7 +68,8 @@ export default {
         contents: '',
         keywords: '',
         sentiment: -1,
-        date: ''
+        date: '',
+        response: ''
       }
     })
   },

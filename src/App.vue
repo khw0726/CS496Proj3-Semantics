@@ -31,7 +31,7 @@
     <div class="ui text container" id="app">
       <h1 class = "ui dividing header">Just a small diary</h1>
       <List v-if="status == 'list'" :items="diary" :on-item-click="loadArticle"></List>
-      <Diary v-else-if="status == 'read'" :my-article="targetArticle" :remove-article="removeArticle"></Diary>
+      <Diary v-else-if="status == 'read'" :my-article="targetArticle" :remove-article="removeArticle" :token="token" :secret="secret"></Diary>
       <Edit v-else-if="status == 'write'" :diary="diary" :onSubmit="addEntry"></Edit>
       <MyChart v-else-if="status == 'stats'" :chart-data="chartData" :options="null"></MyChart>
     </div>
@@ -165,7 +165,6 @@ export default {
     },
     onSignInClick () {
       console.log(this.user)
-
       let provider = new firebase.auth.TwitterAuthProvider()
       authRef.signInWithPopup(provider).then(function (result) {
         this.token = result.credential.accessToken
@@ -178,7 +177,8 @@ export default {
       })
     },
     onSignOutClick () {
-      $(this.$el).find('#login-modal').modal('show')
+      authRef.signOut()
+      $('ui.modal').modal('show')
       this.status = 'login'
     }
     // },
@@ -199,6 +199,9 @@ export default {
 
 <style>
 #app {
-  margin-top: 60px;
+  margin-top: 3em;
+}
+#app .ui.dividing.header {
+  margin-bottom: 2em;
 }
 </style>
