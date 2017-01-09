@@ -9,6 +9,5 @@ var config = {
 }
 
 let fb = firebase.initializeApp(config)
-let db = fb.database()
 
-export default db
+export default fb

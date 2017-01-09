@@ -5,24 +5,27 @@
         Sign in
       </div>
       <div class="ui container center aligned">
-        <div class="ui vertical buttons">
-        <button class="ui approve labeled icon button">
-          <i class="google icon"/>Continue
+        <!--<div class="ui vertical buttons">-->
+        <!--<button class="ui approve labeled icon button">
+          <i class="twitter icon"/>
         </button>
-        <br><br>
-        <button class="ui approve inverted basic green labeled icon button">
-          <i class="google icon"/>Start
+        <br><br>-->
+        <div class="actions">
+        <button class="ui inverted basic blue labeled icon button" v-on:click="onSignInClick()">
+          <i class="twitter icon"/>Start
         </button>
         </div>
+        <!--</div>-->
+        <div class="content" v-if="loginFailure"> Log-in failed </div>
       </div>
     </div>
     <div id="menu" class="ui labeled icon small right fixed vertical hidden inverted menu">
       <!--<div class="ui container">-->
-        <a class="item" :class="{ active: status == 'list' }" id="menu-list" v-on:click="status = 'list'"><i class="calendar icon"/>List</a>
+        <a class="item" :class="{ active: status == 'list' }" id="menu-list" v-on:click="status = 'list'"><i class="unordered list icon"/>List</a>
         <!--<a class="item" id="menu-read" v-on:click="loadArticle()"><i class="file text outline icon"/>Read</a>-->
         <a class="item" :class="{ active: status == 'write' }" v-on:click="status = 'write'" ><i class="write icon"/>Write</a>
         <a class="item" :class="{ active: status == 'stats' }" v-on:click="status = 'stats'" ><i class="line chart icon"/>Stats</a>
-        <a class="item"><i class="sign out icon"/> Sign Out</a>
+        <a class="item" @click="onSignOutClick()"><i class="sign out icon" /> Sign Out</a>
       <!--</div>-->
     </div>
     <div class="ui text container" id="app">
@@ -36,15 +39,26 @@
 </template>
 <script>
 import $ from 'jquery'
-
+import firebase from 'firebase'
 // import semantic from 'semantic'
 import Diary from './components/Diary'
 import List from './components/List'
 import Edit from './components/Edit'
 import Calendar from './components/Calendar'
 import MyChart from './components/MyChart'
-import db from './db'
+
+const config = {
+  apiKey: 'AIzaSyCGUiEq7RzyYn1wne4rwJZtEZn1m6QtJV0',
+  authDomain: 'test-web-91d3a.firebaseapp.com',
+  databaseURL: 'https://test-web-91d3a.firebaseio.com',
+  storageBucket: 'test-web-91d3a.appspot.com',
+  messagingSenderId: '464548710498'
+}
+let fb = firebase.initializeApp(config)
+const db = fb.database()
 const diaryRef = db.ref('diary')
+const authRef = fb.auth()
+// const provider = new fb.auth.TwitterAuthProvider();
 export default {
   name: 'app',
   components: {
@@ -75,7 +89,11 @@ export default {
           data: this.sentiments
         }]
       },
-      status: 'login'
+      status: 'login',
+      loginFailure: false,
+      token: '',
+      secret: '',
+      user: ''
     })
   },
   watch: {
@@ -106,7 +124,9 @@ export default {
     //     $('.modal .dimmer').show()
     //   })
     // })
-    $(this.$el).find('#login-modal').modal('setting', 'closable', false).modal('show')
+    $(this.$el).find('#login-modal').modal({
+      closable: false
+    }).modal('show')
   },
 
   //   // $('#sb').sidebar({context: '#app'})
@@ -143,8 +163,23 @@ export default {
         return diary.sentiment
       })
     },
-    onLoginClick () {
-      // if login successes, Continue. else go back to the modal
+    onSignInClick () {
+      console.log(this.user)
+
+      let provider = new firebase.auth.TwitterAuthProvider()
+      authRef.signInWithPopup(provider).then(function (result) {
+        this.token = result.credential.accessToken
+        this.secret = result.credential.secret
+        this.user = result.user
+        $('.ui.modal').modal('hide')
+        this.status = 'stats'
+      }.bind(this)).catch(function (error) {
+        console.log('error' + error)
+      })
+    },
+    onSignOutClick () {
+      $(this.$el).find('#login-modal').modal('show')
+      this.status = 'login'
     }
     // },
     // onListingClick () {

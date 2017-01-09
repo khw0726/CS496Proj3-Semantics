@@ -7,13 +7,21 @@
         <h2 class="ui sub header">{{dateStr()}}</h2>        
       </div>
       <br>
-      <div class="ui content">
+      <div class="ui contents">
         <p>{{myArticle.contents}}</p>
       </div>
-    
-      <div class="ui teal message">
+      
+      <h4 class="ui icon header">
+        <i class="left quote icon"/>
+      </h4>
+      <div class="ui contents">
         <p>{{ myArticle.keywords}} {{ myArticle.sentiment }}</p>
       </div>
+      <br>
+        <div class="ui right floating blue button">
+          <i class="twitter icon"></i> Retweet
+        </div>
+
       <br>
   </div>
 </template>
