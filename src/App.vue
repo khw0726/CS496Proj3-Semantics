@@ -19,7 +19,8 @@
         <div class="content" v-if="loginFailure"> Log-in failed </div>
       </div>
     </div>
-    <div id="menu" class="ui labeled icon small right fixed vertical hidden inverted menu">
+
+    <div id="menu" class="ui labeled icon small right fixed vertical hidden inverted menu visible thin sidebar">
       <!--<div class="ui container">-->
         <a class="item" :class="{ active: status == 'list' }" id="menu-list" v-on:click="status = 'list'"><i class="unordered list icon"/>List</a>
         <!--<a class="item" id="menu-read" v-on:click="loadArticle()"><i class="file text outline icon"/>Read</a>-->
@@ -35,8 +36,9 @@
       <Diary v-else-if="status == 'read'" :my-article="targetArticle" :remove-article="removeArticle" :token="token" :secret="secret"></Diary>
       <Edit v-else-if="status == 'write'" :diary="diary" :onSubmit="addEntry" :token="this.token"></Edit>
       <!--<Options v-else-if="status == 'options'" ></Options>-->
-      <MyChart v-else-if="status == 'stats'" :chart-data="chartData" :options="null"></MyChart>
+      <MyChart v-else-if="status == 'stats'" :chart-data="chartData" :options="chartOptions"></MyChart>
     </div>
+
   </div>
 </template>
 <script>
@@ -88,14 +90,29 @@ export default {
         labels: this.dates,
         datasets: [{
           label: 'Sentiments',
-          data: this.sentiments
+          data: this.sentiments,
+          fill: false
         }]
       },
       status: 'login',
       loginFailure: false,
       token: '',
       secret: '',
-      user: ''
+      user: '',
+      chartOptions: {
+        title: {
+          display: true,
+          text: 'Your sentiments'
+        },
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Happiness level'
+            }
+          }]
+        }
+      }
     })
   },
   watch: {
@@ -106,7 +123,8 @@ export default {
         labels: this.dates,
         datasets: [{
           label: 'Sentiments',
-          data: this.sentiments
+          data: this.sentiments,
+          fill: false
         }]
       }
     },
@@ -117,7 +135,8 @@ export default {
         labels: this.dates,
         datasets: [{
           label: 'Sentiments',
-          data: this.sentiments
+          data: this.sentiments,
+          fill: false
         }]
       }
     }
@@ -131,12 +150,15 @@ export default {
     //     $(this).addClass('active')
     //   })
     // })
-    // $(function () {
-    //   $('.modal').ready(function () {
-    //     console.log($('.modal .dimmer'))
-    //     $('.modal .dimmer').show()
-    //   })
-    // })
+    $(window).resize(function () {
+      if (window.innerWidth < 1152) { //  Some arbitrary mobile width
+        $('.sidebar').addClass('top').removeClass('right').removeClass('vertical')
+        $('.item').addClass('center')
+      } else {
+        $('.sidebar').removeClass('top').addClass('right').addClass('vertical')
+        $('.item').removeClass('center')
+      }
+    })
     $(this.$el).find('#login-modal').modal({
       closable: false
     }).modal('show')
@@ -180,7 +202,7 @@ export default {
       return this.diary.filter(function (diary) {
         return diary.token === token
       }).map(function (diary) {
-        return diary.sentiment
+        return diary.sentiment - 0.5
       })
     },
     getDiaryList () {
@@ -204,7 +226,10 @@ export default {
     },
     onSignOutClick () {
       authRef.signOut()
-      $('ui.modal').modal('show')
+      this.token = ''
+      this.secret = ''
+      this.user = ''
+      $('.ui.modal').modal('show')
       this.status = 'login'
     }
     // },
@@ -225,7 +250,7 @@ export default {
 
 <style>
 #app {
-  margin-top: 3em;
+  margin-top: 5em;
 }
 #app .ui.dividing.header {
   margin-bottom: 2em;
