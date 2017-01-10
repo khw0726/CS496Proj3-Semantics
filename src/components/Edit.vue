@@ -122,12 +122,12 @@
             console.log(r)
             console.log(r.resp.documents[0].score)
             this.newEntry.sentiment = r.resp.documents[0].score
-            var len=0
-            if(this.newEntry.keywords.length>3)
-              len=3
-            else
-              len=this.newEntry.keywords.length
-            var keyword = this.newEntry.keywords[Math.floor(Math.random() * len)]
+            //var len=0
+            //if(this.newEntry.keywords.length>3)
+            //  len=3
+            //else
+            //  len=this.newEntry.keywords.length
+            var keyword = this.newEntry.keywords[0]
 
             var bad0 = ["That's too bad.\n", "I'm so sorry about that.\n"]
             var bad1 = ["Even though " + keyword + " made you feel bad, You are really nice person!\n",
