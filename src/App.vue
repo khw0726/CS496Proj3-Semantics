@@ -5,11 +5,6 @@
         Sign in
       </div>
       <div class="ui container center aligned">
-        <!--<div class="ui vertical buttons">-->
-        <!--<button class="ui approve labeled icon button">
-          <i class="twitter icon"/>
-        </button>
-        <br><br>-->
         <div class="actions">
         <button class="ui inverted basic blue labeled icon button" v-on:click="onSignInClick()">
           <i class="twitter icon"/>Start
@@ -20,13 +15,13 @@
       </div>
     </div>
 
-    <div id="menu" class="ui labeled icon small right fixed vertical hidden inverted menu visible thin sidebar">
+    <div id="menu" class="ui labeled icon small right fixed vertical inverted menu visible thin sidebar">
       <!--<div class="ui container">-->
-        <a class="item" :class="{ active: status == 'list' }" id="menu-list" v-on:click="status = 'list'"><i class="unordered list icon"/>List</a>
+        <a class="item" :class="{ active: status == 'list' }" id="menu-list" v-on:click="status = 'list'"><i class="unordered list icon"/><div class="ui mobile only">List</div></a>
         <!--<a class="item" id="menu-read" v-on:click="loadArticle()"><i class="file text outline icon"/>Read</a>-->
-        <a class="item" :class="{ active: status == 'write' }" v-on:click="status = 'write'" ><i class="write icon"/>Write</a>
-        <a class="item" :class="{ active: status == 'stats' }" v-on:click="status = 'stats'" ><i class="line chart icon"/>Stats</a>
-        <a class="item" :class="{ active: status == 'options' }" v-on:click="status = 'options'" ><i class="options icon"/>Options</a>
+        <a class="item" :class="{ active: status == 'write' }" v-on:click="status = 'write'" ><i class="write icon"/><div class="ui mobile only">Write</div></a>
+        <a class="item" :class="{ active: status == 'stats' }" v-on:click="status = 'stats'" ><i class="line chart icon"/><div class="ui mobile only">Stats</div></a>
+        <!--<a class="item" :class="{ active: status == 'options' }" v-on:click="status = 'options'" ><i class="options icon"/><div class="ui mobile only">Options</div></a>-->
         <a class="item" @click="onSignOutClick()"><i class="sign out icon" /> Sign Out</a>
       <!--</div>-->
     </div>
@@ -150,13 +145,16 @@ export default {
     //     $(this).addClass('active')
     //   })
     // })
+    if (window.innerWidth < 720) { //  Some arbitrary mobile width
+      $('.sidebar').addClass('bottom').removeClass('right').removeClass('vertical').addClass('four').addClass('item')
+    } else {
+      $('.sidebar').removeClass('bottom').addClass('right').addClass('vertical').removeClass('four').removeClass('item')
+    }
     $(window).resize(function () {
-      if (window.innerWidth < 1152) { //  Some arbitrary mobile width
-        $('.sidebar').addClass('top').removeClass('right').removeClass('vertical')
-        $('.item').addClass('center')
+      if (window.innerWidth < 720) { //  Some arbitrary mobile width
+        $('.sidebar').addClass('bottom').removeClass('right').removeClass('vertical').addClass('four').addClass('item')
       } else {
-        $('.sidebar').removeClass('top').addClass('right').addClass('vertical')
-        $('.item').removeClass('center')
+        $('.sidebar').removeClass('bottom').addClass('right').addClass('vertical').removeClass('four').removeClass('item')
       }
     })
     $(this.$el).find('#login-modal').modal({
@@ -181,6 +179,7 @@ export default {
       this.status = 'read'
     },
     removeArticle (article) {
+      this.status = 'list'
       diaryRef.child(article['.key']).remove()
       this.targetArticle.title = ''
       this.targetArticle.contents = ''
@@ -251,6 +250,7 @@ export default {
 <style>
 #app {
   margin-top: 5em;
+  margin-bottom: 5em;
 }
 #app .ui.dividing.header {
   margin-bottom: 2em;

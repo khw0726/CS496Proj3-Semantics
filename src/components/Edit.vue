@@ -125,55 +125,54 @@
 
             var keyword = this.newEntry.keywords[Math.floor(Math.random() * this.newEntry.keywords.length)]
 
-            var bad0 = ["That's too bad.\n", "I'm so sorry about that.\n"]
-            var bad1 = ["Even though " + keyword + " made you feel bad, You are really nice person!\n",
-            "So you are saying that " + keyword + " made you feel bad, right?\n",
-            "So you are saying that " + keyword + " made you so tired, right?\n"]
-            var bad2 = ["Actually, don't take it too seriously.\n", "Just forget all about it.\n",
-              "Actually, that's not your fault.\n"]
-            var bad3 = "There's a saying:\n"
-            var bad4 = [keyword.substring(0,1).toUpperCase()+keyword.substring(1,keyword.length).toLowerCase() + " is a great teacher, but unfortunately it kills all its pupils.\n",
-              "Although the world is full of suffering, it is full also of the overcoming of it.\n",
-              "You can learn a little from victory; you can learn everything from defeat.\n",
-              "Never, never, never, never give up.\n",
-              "A good medicine tastes bitter.\n",
-              "No pain, no gain.\n",
-              "Every cloud has a silver lining.\n",
-              "Try your best rather than be the best.\n"]
+            var bad0 = ["That's too bad.<br>", "I'm so sorry about that.<br>"]
+            var bad1 = ["Even though " + keyword + " made you feel bad, You are really nice person!<br>",
+            "So you are saying that " + keyword + " made you feel bad, right?<br>",
+            "So you are saying that " + keyword + " made you so tired, right?<br>"]
+            var bad2 = ["Actually, don't take it too seriously.<br>", "Just forget all about it.<br>",
+              "Actually, that's not your fault.<br>"]
+            var bad3 = "There's a saying:<br>"
+            var bad4 = [keyword + " is a great teacher, but unfortunately it kills all its pupils.<br>",
+              "Although the world is full of suffering, it is full also of the overcoming of it.<br>",
+              "You can learn a little from victory; you can learn everything from defeat.<br>",
+              "Never, never, never, never give up.<br>",
+              "A good medicine tastes bitter.<br>",
+              "No pain, no gain.<br>",
+              "Every cloud has a silver lining.<br>",
+              "Try your best rather than be the best.<br>"]
             var bad5 = "Anyway, "
             var alcohol = ["soju", "beer", "whisky", "makgeolli", "wine"]
             var game = ["Overwatch", "LoL", "Heroes of the Storm", "Tetris"]
-            var bad6 = ["Why don't you drink some " + alcohol[Math.floor(Math.random() * alcohol.length)] + " for a change?\n",
-            "Why don't you play some game like " + game[Math.floor(Math.random() * game.length)] + " for your feeling?\n",
-              "Why don't you enroll CS496 course and write some code?\n",
-              "Why don't you take a break for your work and travel around the world?\n"]
-            var bad7 = "It'll make you feel better.\n"
-            var for_alcohol = "But make sure you drink it a little.\nToo much alcohol will take your energy away.\n"
-            var for_game = "But make sure you play it for a while.\nToo much game will take your energy away.\n"
-            var bad8 = ["Finally, I wish you have a great day tomorrow.\n", "Finally, I think you can start again tomorrow.\n"]
-            var bad9 = ["Do your best! ><\n", "Hang in there! ><\n", "Cheer up! ><\n", "You can do it! ><\n"]
-            var bye = ["Bye!\n", "Annyeong!\n", "Sayonara!\n", "Adios!\n"]
-
-            var good0 = ["Congratulations!\n", "Amazing!\n","Wonderful!\n"]
-            var good1 = ["So you are saying that " + keyword + " made you feel great, right?\n",
-            "I think " + keyword + " made you happy, right?\n",
-            "I think " + keyword + " made you feel great, right?\n"]
-            var good2 = ["Good for you!\n", "You had a really great day!\n", "I'm so happy for you.\n", "That's great.\n"]
-            var good3 = "Also, I totally agree with the saying like this: \n"
-            var good4 = [keyword.substring(0,1).toUpperCase()+keyword.substring(1,keyword.length).toLowerCase() + " banishes those three great evils- boredom, vice and poverty.\n",
-            "Who controls the " + keyword + " controls the future.\n",
-            "All roads lead to " + keyword + ".\n",
-            keyword + " is a second nature.\n",
-            keyword + " is power.\n"]
-            var good5 = "I believe you also like this saying. :)\n"
+            var bad6 = ["Why don't you drink some " + alcohol[Math.floor(Math.random() * alcohol.length)] + " for a change?<br>",
+            "Why don't you play some game like " + game[Math.floor(Math.random() * game.length)] + " for your feeling?<br>",
+              "Why don't you enroll CS496 course and write some code?<br>",
+              "Why don't you take a break for your work and travel around the world?<br>"]
+            var bad7 = "It'll make you feel better.<br>"
+            var for_alcohol = "But make sure you drink it a little.<br>Too much alcohol will take your energy away.<br>"
+            var for_game = "But make sure you play it for a while.<br>Too much game will take your energy away.<br>"
+            var bad8 = ["Finally, I wish you have a great day tomorrow.<br>", "Finally, I think you can start again tomorrow.<br>"]
+            var bad9 = ["Do your best! ><<br>", "Hang in there! ><<br>", "Cheer up! ><<br>", "You can do it! ><<br>"]
+            var bye = ["Bye!<br>", "Annyeong!<br>", "Sayonara!<br>", "Adios!<br>"]
+            var good0 = ["Congratulations!<br>", "Amazing!<br>"]
+            var good1 = ["So you are saying that " + keyword + " made you feel great, right?<br>",
+            "I think " + keyword + " made you happy, right?<br>",
+            "I think " + keyword + " made you feel great, right?<br>"]
+            var good2 = ["Good for you!<br>", "You had a really great day!<br>", "I'm so happy for you.<br>", "That's great.<br>"]
+            var good3 = "Also, I totally agree with the saying like this: <br>"
+            var good4 = [keyword + " banishes those three great evils- boredom, vice and poverty.<br>",
+            "Who controls the " + keyword + " controls the future.<br>",
+            "All roads lead to " + keyword + ".<br>",
+            keyword + " is a second nature.<br>",
+            keyword + " is power.<br>"]
+            var good5 = "I believe you also like this saying. :)<br>"
             var good6 = "Anyway, "
-            var good7 = ["Why don't you drink some " + alcohol[Math.floor(Math.random() * alcohol.length)] + "?\n",
-            "Why don't you play some game like " + game[Math.floor(Math.random() * game.length)] + "?\n",
-              "Why don't you enroll CS496 course and write some code?\n",
-              "Why don't you take some time with your friends?\n"]
-            var good8 = "It'll help you finish this day with happiness.\n"
-            var good9 = ["Finally, I hope you also have a great day tomorrow!\n", "Finally, I wish you also have a happy day tomorrow!\n",
-              "Finally, I wish you also have a nice day tomorrow!\n"]
+            var good7 = ["Why don't you drink some " + alcohol[Math.floor(Math.random() * alcohol.length)] + "?<br>",
+            "Why don't you play some game like " + game[Math.floor(Math.random() * game.length)] + "?<br>",
+              "Why don't you enroll CS496 course and write some code?<br>",
+              "Why don't you take some time with your friends?<br>"]
+            var good8 = "It'll help you finish this day with happiness.<br>"
+            var good9 = ["Finally, I hope you also have a great day tomorrow!<br>", "Finally, I wish you also have a happy day tomorrow!<br>",
+              "Finally, I wish you also have a nice day tomorrow!<br>"]
             var final_response = ""
 
             if (this.newEntry.sentiment >= 0.5) {

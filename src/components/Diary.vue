@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!--<button class="btn btn-default" v-on:click="remove(myArticle)">X</button>-->
       <div>
         <h2 class="ui header">
         {{myArticle.title}} </h2>
@@ -8,28 +7,49 @@
       </div>
       <br>
       <div class="ui contents diary">
-        <p>{{myArticle.contents}}</p>
+        <p style="text-indent: 2em" v-html="myArticle.contents.replace(/\n\r?/g, '</p><p style=text-indent: 2em>')"></p>
       </div>
       
       <h6 class="ui icon header">
         <i class="left quote icon"/>
       </h6>
-      <div class="ui contents response">
-        <pre><p>{{ myArticle.response }}</p></pre>
+      <div v-html="myArticle.response" class="ui contents response">
+        <!--<p>{{ myArticle.response }}</p>-->
+      </div>
+      <div class="ui contents">
+        {{myArticle.keywords}} {{myArticle.sentiment}}
       </div>
       <div class="ui divider"/>
-
-      <button class="ui right floated labeled icon basic blue button" v-on:click="retweet(myArticle.contents, myArticle.response)">
-        <i class="twitter icon"></i> Tweet
-      </button>
+      <div class="rtbutton">
+        <button id="rtb" class="ui circular right floated labeled icon basic twitter button" v-on:click="retweet(myArticle.contents, myArticle.response)">
+          <i class="twitter icon"/>Tweet
+        </button>
+      </div>
+      <button class="ui circular left floated labeled icon basic negative button" v-on:click="remove(myArticle)"><i class="remove icon"/>Delete</button>
+      <div class="ui inverted custom popup top left transition hidden">
+        Tweet posted <i class="smile icon"/>
+      </div>
+      <div class="ui inverted sad popup top left transition hidden">
+        Try again <i class="frown icon"/>
+      </div>
       <br>
   </div>
 </template>
 
 <script>
+  import $ from 'jquery'
   export default {
     name: 'diary',
     props: ['myArticle', 'removeArticle', 'token', 'secret'],
+    mounted: function () {
+      $('.rtbutton .button').popup({
+        popup: $('.custom.popup'),
+        on: 'click'
+      })
+      $('.rtbutton .button').on('click', function () {
+        $('.rtbutton .button').removeClass('basic').hideOnScroll('always')
+      })
+    },
     methods: {
       dateStr: function () {
         let d = new Date(this.myArticle.date)
@@ -58,7 +78,12 @@
             reject()
           }
           xhr.send()
+        }).then(function () {
+          // console.log(this.status)
+          // $('.custom .popup').popup('show')
+          // $('.rtbutton .button').removeClass('basic')
         }).catch(function (err) {
+          // $('.sad .popup').popup('show')
           console.log(err)
         })
       }
@@ -67,14 +92,15 @@
 </script>
 
 <style>
-#app .ui.contents.diary {
-  text-indent: '4em';
+#app .ui .contents .diary {
+  text-indent: 4em;
   /*font: 'Consolas';
   margin-top: '20em';
   color: darkslategray;*/
 }
-#app .ui.contents.response {
+#app .ui.response {
   text-indent: '4em';
+  font: 'Consolas';
   color: darkslategray;
 }
 </style>
