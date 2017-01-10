@@ -13,7 +13,7 @@
       <h6 class="ui icon header">
         <i class="left quote icon"/>
       </h6>
-      <div v-html="myArticle.response" class="ui contents response">
+      <div v-html="myArticle.response.replace(/\n\r?/g, '<br/>')" class="ui contents response">
         <!--<p>{{ myArticle.response }}</p>-->
       </div>
       <div class="ui contents">
@@ -66,7 +66,7 @@
         let secret = this.secret
         new Promise(function (resolve, reject) {
           let xhr = new XMLHttpRequest()
-          xhr.open('GET', 'http://ec2-52-79-161-158.ap-northeast-2.compute.amazonaws.com:3000/?diary=[CS496]Just a small diary%0A[Diary] ' + diary + '%0A&response=[Sally] ' + response +'%0AFor more information: http://localhost:8080'+ '&user_token=' + token + '&user_secret=' + secret, true)
+          xhr.open('GET', 'http://ec2-52-79-161-158.ap-northeast-2.compute.amazonaws.com:3000/?diary=[CS496]Just a small diary%0A[Diary] ' + diary + '%0A&response=[Sally] ' + response + '%0AFor more information: http://localhost:8080' + '&user_token=' + token + '&user_secret=' + secret, true)
           xhr.onload = function () {
             if (this.status >= 200 && this.status < 300) {
               resolve()
