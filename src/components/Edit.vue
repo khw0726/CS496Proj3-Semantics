@@ -132,7 +132,7 @@
             var bad2 = ["Actually, don't take it too seriously.\n", "Just forget all about it.\n",
               "Actually, that's not your fault.\n"]
             var bad3 = "There's a saying:\n"
-            var bad4 = [keyword + " is a great teacher, but unfortunately it kills all its pupils.\n",
+            var bad4 = [keyword.substring(0,1).toUpperCase()+keyword.substring(1,keyword.length).toLowerCase() + " is a great teacher, but unfortunately it kills all its pupils.\n",
               "Although the world is full of suffering, it is full also of the overcoming of it.\n",
               "You can learn a little from victory; you can learn everything from defeat.\n",
               "Never, never, never, never give up.\n",
@@ -154,13 +154,13 @@
             var bad9 = ["Do your best! ><\n", "Hang in there! ><\n", "Cheer up! ><\n", "You can do it! ><\n"]
             var bye = ["Bye!\n", "Annyeong!\n", "Sayonara!\n", "Adios!\n"]
 
-            var good0 = ["Congratulations!\n", "Amazing!\n"]
+            var good0 = ["Congratulations!\n", "Amazing!\n","Wonderful!\n"]
             var good1 = ["So you are saying that " + keyword + " made you feel great, right?\n",
             "I think " + keyword + " made you happy, right?\n",
             "I think " + keyword + " made you feel great, right?\n"]
             var good2 = ["Good for you!\n", "You had a really great day!\n", "I'm so happy for you.\n", "That's great.\n"]
             var good3 = "Also, I totally agree with the saying like this: \n"
-            var good4 = [keyword + " banishes those three great evils- boredom, vice and poverty.\n",
+            var good4 = [keyword.substring(0,1).toUpperCase()+keyword.substring(1,keyword.length).toLowerCase() + " banishes those three great evils- boredom, vice and poverty.\n",
             "Who controls the " + keyword + " controls the future.\n",
             "All roads lead to " + keyword + ".\n",
             keyword + " is a second nature.\n",
@@ -188,7 +188,7 @@
                 final_response = final_response + for_alcohol
               if (check == 1)
                 final_response = final_response + for_game
-                  + good8 + good9[Math.floor(Math.random() * good9.length)] + bye[Math.floor(Math.random() * bye.length)]
+              final_response = final_response + good8 + good9[Math.floor(Math.random() * good9.length)] + bye[Math.floor(Math.random() * bye.length)]
             }
             else {
               var is_alcohol = 0;
