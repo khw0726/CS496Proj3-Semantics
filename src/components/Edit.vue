@@ -122,13 +122,13 @@
             console.log(r)
             console.log(r.resp.documents[0].score)
             this.newEntry.sentiment = r.resp.documents[0].score
-            //var len=0
-            //if(this.newEntry.keywords.length>3)
-            //  len=3
-            //else
-            //  len=this.newEntry.keywords.length
-            var keyword = this.newEntry.keywords[0]
-
+            var len=0
+            // if(this.newEntry.keywords.length>3)
+            //   len=3
+            // else
+            //   len=this.newEntry.keywords.length
+            
+            let keyword = this.newEntry.keywords.length === 0 ? '' : this.newEntry.keywords[0]
             var bad0 = ["That's too bad.\n", "I'm so sorry about that.\n"]
             var bad1 = ["Even though " + keyword + " made you feel bad, You are really nice person!\n",
             "So you are saying that " + keyword + " made you feel bad, right?\n",
@@ -136,14 +136,14 @@
             var bad2 = ["Actually, don't take it too seriously.\n", "Just forget all about it.\n",
               "Actually, that's not your fault.\n"]
             var bad3 = "There's a saying:\n"
-            var bad4 = [keyword.substring(0,1).toUpperCase() + keyword.substring(1) + " is a great teacher, but unfortunately it kills all its pupils.\n",
-              "Although the world is full of suffering, it is full also of the overcoming of it.\n",
-              "You can learn a little from victory; you can learn everything from defeat.\n",
-              "Never, never, never, never give up.\n",
-              "A good medicine tastes bitter.\n",
-              "No pain, no gain.\n",
-              "Every cloud has a silver lining.\n",
-              "Try your best rather than be the best.\n"]
+            var bad4 = ["   " + keyword.substring(0,1).toUpperCase() + keyword.substring(1) + " is a great teacher, but unfortunately it kills all its pupils.\n",
+              "   Although the world is full of suffering, it is full also of the overcoming of it.\n",
+              "   You can learn a little from victory; you can learn everything from defeat.\n",
+              "   Never, never, never, never give up.\n",
+              "   A good medicine tastes bitter.\n",
+              "   No pain, no gain.\n",
+              "   Every cloud has a silver lining.\n",
+              "   Try your best rather than be the best.\n"]
             var bad5 = "Anyway, "
             var alcohol = ["soju", "beer", "whisky", "makgeolli", "wine"]
             var game = ["Overwatch", "LoL", "Heroes of the Storm", "Tetris"]
@@ -177,38 +177,49 @@
             var good8 = "It'll help you finish this day with happiness.\n"
             var good9 = ["Finally, I hope you also have a great day tomorrow!\n", "Finally, I wish you also have a happy day tomorrow!\n",
               "Finally, I wish you also have a nice day tomorrow!\n"]
+            var soso0 = ["Hello!\n", "Hi!\n", "Howdy!\n"]
+            var soso1 = "I think you had an ordinary day today!\n"
+            var soso2 = "Ordinary day is not bad, but sometimes challenging is good for your life!\n"
+            var soso3 = "There's a saying:\n"
+            var soso4 = ["Stay hungry, stay Foolish.\n", "Well begun is half done.\n", "Rather be dead than cool.\n", "Blaze with the fire that is never extinguished.\n", "Great deeds are usually wrought at great risks.\n"]
+            var soso5 = "So, why don't you enroll CS496 course and write some code?\n"
+            var soso6 = "It makes your life so spectacular!\n"
+            var soso7 = "Anyway, I wish you have a great day tomorrow.\n"
             var final_response = ""
 
-            if (this.newEntry.sentiment >= 0.5) {
-              var is_alcohol = 0;
-              var is_game = 0;
-              var check = 0;
-              check = Math.floor(Math.random() * good7.length);
+            if(keyword=="")
+              final_response = soso0[Math.floor(Math.random() * soso0.length)] + soso1 + soso2 + soso3 + soso4[Math.floor(Math.random() * soso4.length)] + soso5 + soso6 + soso7
+            else
+            {
+              if (this.newEntry.sentiment >= 0.5) {
+                var is_alcohol = 0;
+                var is_game = 0;
+                var check = 0;
+                check = Math.floor(Math.random() * good7.length);
 
-              final_response = good0[Math.floor(Math.random() * good0.length)] + good1[Math.floor(Math.random() * good1.length)] + good2[Math.floor(Math.random() * good2.length)] + good3 + good4[Math.floor(Math.random() * good4.length)] + good5 + good6 +
-                good7[check]
-              if (check == 0)
-                final_response = final_response + for_alcohol
-              if (check == 1)
-                final_response = final_response + for_game
-              final_response = final_response + good8 + good9[Math.floor(Math.random() * good9.length)] + bye[Math.floor(Math.random() * bye.length)]
+                final_response = good0[Math.floor(Math.random() * good0.length)] + good1[Math.floor(Math.random() * good1.length)] + good2[Math.floor(Math.random() * good2.length)] + good3 + good4[Math.floor(Math.random() * good4.length)] + good5 + good6 +
+                  good7[check]
+                if (check == 0)
+                  final_response = final_response + for_alcohol
+                if (check == 1)
+                  final_response = final_response + for_game
+                final_response = final_response + good8 + good9[Math.floor(Math.random() * good9.length)] + bye[Math.floor(Math.random() * bye.length)]
+              }
+              else {
+                var is_alcohol = 0;
+                var is_game = 0;
+                var check = 0;
+                check = Math.floor(Math.random() * bad6.length);
+                final_response = bad0[Math.floor(Math.random() * bad0.length)] + bad1[Math.floor(Math.random() * bad1.length)] + bad2[Math.floor(Math.random() * bad2.length)] + bad3 + bad4[Math.floor(Math.random() * bad4.length)] + bad5 +
+                  bad6[check]
+                if (check == 0)
+                  final_response = final_response + for_alcohol
+                if (check == 1)
+                  final_response = final_response + for_game
+                final_response = final_response + bad8[Math.floor(Math.random() * bad8.length)] + bad9[Math.floor(Math.random() * bad9.length)] + bye[Math.floor(Math.random() * bye.length)]
+              }
             }
-            else {
-              var is_alcohol = 0;
-              var is_game = 0;
-              var check = 0;
-              check = Math.floor(Math.random() * bad6.length);
-              final_response = bad0[Math.floor(Math.random() * bad0.length)] + bad1[Math.floor(Math.random() * bad1.length)] + bad2[Math.floor(Math.random() * bad2.length)] + bad3 + bad4[Math.floor(Math.random() * bad4.length)] + bad5 +
-                bad6[check]
-              if (check == 0)
-                final_response = final_response + for_alcohol
-              if (check == 1)
-                final_response = final_response + for_game
-              final_response = final_response + bad8[Math.floor(Math.random() * bad8.length)] + bad9[Math.floor(Math.random() * bad9.length)] + bye[Math.floor(Math.random() * bye.length)]
-            }
-
             this.newEntry.response = final_response
-
             this.onSubmit(this.newEntry)
             this.newEntry.response = ''
             this.newEntry.title = ''

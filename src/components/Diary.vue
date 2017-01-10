@@ -19,15 +19,12 @@
       <div class="response">
         <div v-html="respLines"></div>
       </div>
-<<<<<<< HEAD
       <!--<div class="ui contents">
-=======
-      <!--<h6 class="ui right floated icon header">
+      <h6 class="ui right floated icon header">
         <i class="right quote icon"/>
       </h6>-->
-      <br>
-      <div class="ui contents">
->>>>>>> 3edacc04f236a2a7e18bf770c1b1bb12e4627fc6
+     
+      <!--<div class="ui contents">
         {{myArticle.keywords}} {{myArticle.sentiment}}
       </div>-->
       <div class="ui divider"/>

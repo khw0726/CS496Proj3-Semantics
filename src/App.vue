@@ -168,11 +168,12 @@ export default {
   // },
   methods: {
     addEntry (newEntry) {
+      console.log(newEntry)
       let newPostKey = diaryRef.push(newEntry).key
       diaryRef.child(newPostKey).once('value').then(function (snapshot) {
         this.targetArticle = snapshot.val()
+        this.status = 'read'
       }.bind(this))
-      this.status = 'read'
       // $('.ui .item').removeClass('active')
     },
     loadArticle (article) {
