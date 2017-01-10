@@ -152,8 +152,9 @@
               "Why don't you enroll CS496 course and write some code?\n",
               "Why don't you take a break for your work and travel around the world?\n"]
             var bad7 = "It'll make you feel better.\n"
-            var for_alcohol = "But make sure you drink it a little.\nToo much alcohol will take your energy away.\n"
-            var for_game = "But make sure you play it for a while.\nToo much game will take your energy away.\n"
+            var for_alcohol = "But make sure you don't drink too much.\nToo much alcohol will take your energy away.\n"
+            //var for_hos = "But make sure you "
+            var for_game = "But make sure you don't play too much.\nToo much game will take your energy away.\n"
             var bad8 = ["Finally, I wish you have a great day tomorrow.\n", "Finally, I think you can start again tomorrow.\n"]
             var bad9 = ["Do your best! ><\n", "Hang in there! ><\n", "Cheer up! ><\n", "You can do it! ><\n"]
             var bye = ["Bye!\n", "Annyeong!\n", "Sayonara!\n", "Adios!\n"]

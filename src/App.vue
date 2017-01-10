@@ -5,11 +5,11 @@
         Sign in
       </div>-->
       <div class="ui container center aligned">
-        <h3 class="ui center aligned">Sign in</h3>
+        <h3 class="ui center aligned">Say Hello to Sally</h3>
         <br/>
         <div class="actions">
         <button class="ui inverted basic blue labeled icon button" v-on:click="onSignInClick()">
-          <i class="twitter icon"/>Start
+          <i class="twitter icon"/>Hello
         </button>
         </div>
         <!--</div>-->
@@ -28,7 +28,7 @@
       <!--</div>-->
     </div>
     <div class="ui text container" id="app">
-      <h1 class = "ui dividing header">Just a small diary</h1>
+      <h1 class = "ui dividing header">Sally: A Lovely Listener for You</h1>
       <List v-if="status == 'list'" :items="getDiaryList(diary)" :on-item-click="loadArticle"></List>
       <Diary v-else-if="status == 'read'" :my-article="targetArticle" :remove-article="removeArticle" :token="token" :secret="secret"></Diary>
       <Edit v-else-if="status == 'write'" :diary="diary" :onSubmit="addEntry" :token="this.token"></Edit>
