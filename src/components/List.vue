@@ -17,6 +17,11 @@
         let a = new Date(item.date)
         return a.toLocaleString('en-US')
       }
+    },
+    computed: {
+      itemList: function () {
+        return this.items.reverse()
+      }
     }
   }
 

@@ -29,7 +29,7 @@
     </div>
     <div class="ui text container" id="app">
       <h1 class = "ui dividing header">Sally: A Lovely Listener for You</h1>
-      <List v-if="status == 'list'" :items="getDiaryList(diary)" :on-item-click="loadArticle"></List>
+      <List v-if="status == 'list'" :items="getDiaryList()" :on-item-click="loadArticle"></List>
       <Diary v-else-if="status == 'read'" :my-article="targetArticle" :remove-article="removeArticle" :token="token" :secret="secret"></Diary>
       <Edit v-else-if="status == 'write'" :diary="diary" :onSubmit="addEntry" :token="this.token"></Edit>
       <!--<Options v-else-if="status == 'options'" ></Options>-->
