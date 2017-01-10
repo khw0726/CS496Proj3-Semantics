@@ -122,8 +122,12 @@
             console.log(r)
             console.log(r.resp.documents[0].score)
             this.newEntry.sentiment = r.resp.documents[0].score
-
-            var keyword = this.newEntry.keywords[Math.floor(Math.random() * this.newEntry.keywords.length)]
+            var len=0
+            if(this.newEntry.keywords.length>3)
+              len=3
+            else
+              len=this.newEntry.keywords.length
+            var keyword = this.newEntry.keywords[Math.floor(Math.random() * len)]
 
             var bad0 = ["That's too bad.\n", "I'm so sorry about that.\n"]
             var bad1 = ["Even though " + keyword + " made you feel bad, You are really nice person!\n",
@@ -132,7 +136,7 @@
             var bad2 = ["Actually, don't take it too seriously.\n", "Just forget all about it.\n",
               "Actually, that's not your fault.\n"]
             var bad3 = "There's a saying:\n"
-            var bad4 = [keyword + " is a great teacher, but unfortunately it kills all its pupils.\n",
+            var bad4 = [keyword.substring(0,1).toUpperCase() + keyword.substring(1) + " is a great teacher, but unfortunately it kills all its pupils.\n",
               "Although the world is full of suffering, it is full also of the overcoming of it.\n",
               "You can learn a little from victory; you can learn everything from defeat.\n",
               "Never, never, never, never give up.\n",
@@ -159,7 +163,7 @@
             "I think " + keyword + " made you feel great, right?\n"]
             var good2 = ["Good for you!\n", "You had a really great day!\n", "I'm so happy for you.\n", "That's great.\n"]
             var good3 = "Also, I totally agree with the saying like this: \n"
-            var good4 = [keyword + " banishes those three great evils- boredom, vice and poverty.\n",
+            var good4 = [keyword.substring(0,1).toUpperCase() + keyword.substring(1) + " banishes those three great evils- boredom, vice and poverty.\n",
             "Who controls the " + keyword + " controls the future.\n",
             "All roads lead to " + keyword + ".\n",
             keyword + " is a second nature.\n",

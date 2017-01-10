@@ -66,11 +66,8 @@
         let secret = this.secret
         new Promise(function (resolve, reject) {
           let xhr = new XMLHttpRequest()
-<<<<<<< HEAD
-          xhr.open('GET', 'http://ec2-52-79-161-158.ap-northeast-2.compute.amazonaws.com:8080/?diary=[CS496]Just a small diary%0A[Diary] ' + diary + '%0A&response=[Sally] ' + response + '%0AFor more information: http://localhost:8080' + '&user_token=' + token + '&user_secret=' + secret, true)
-=======
+
           xhr.open('GET', 'http://ec2-52-79-161-158.ap-northeast-2.compute.amazonaws.com:3000/?diary=[CS496]Just a small diary%0A[Diary] ' + diary + '%0A&response=[Sally] ' + response + '%0AFor more information: http://localhost:8080' + '&user_token=' + token + '&user_secret=' + secret, true)
->>>>>>> e27df33232b256359c5b8f44c8347860aaae9bf3
           xhr.onload = function () {
             if (this.status >= 200 && this.status < 300) {
               resolve()
