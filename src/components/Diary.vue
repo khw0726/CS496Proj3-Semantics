@@ -10,13 +10,24 @@
         <p style="text-indent: 2em" v-html="myArticle.contents.replace(/\n\r?/g, '</p><p style=text-indent: 2em>')"></p>
       </div>
       
-      <h6 class="ui icon header">
+      <!--<h6 class="ui icon header">
         <i class="left quote icon"/>
-      </h6>
-      <div v-html="myArticle.response.replace(/\n\r?/g, '<br/>')" class="ui contents response">
-        <!--<p>{{ myArticle.response }}</p>-->
+      </h6>-->
+      <h3 class="ui header">
+        Sally says:
+      </h3>
+      <div class="response">
+        <div v-html="respLines"></div>
       </div>
+<<<<<<< HEAD
       <!--<div class="ui contents">
+=======
+      <!--<h6 class="ui right floated icon header">
+        <i class="right quote icon"/>
+      </h6>-->
+      <br>
+      <div class="ui contents">
+>>>>>>> 3edacc04f236a2a7e18bf770c1b1bb12e4627fc6
         {{myArticle.keywords}} {{myArticle.sentiment}}
       </div>-->
       <div class="ui divider"/>
@@ -47,7 +58,7 @@
         on: 'click'
       })
       $('.rtbutton .button').on('click', function () {
-        $('.rtbutton .button').removeClass('basic').hideOnScroll('always')
+        $('.rtbutton .button').removeClass('basic')
       })
     },
     methods: {
@@ -88,19 +99,31 @@
           console.log(err)
         })
       }
+    },
+    computed: {
+      respLines: function () {
+        let lines = this.myArticle.response.split('\n')
+        for (let i = 0; i < lines.length; i++) {
+          if (i !== 4) {
+            lines[i] = '<p>' + lines[i] + '</p>'
+          } else {
+            lines[i] = '<p style=text-indent: 4em> <i class="left quote icon"></i>' + lines[i] + '<i class="right quote icon"></i> </p>'
+          }
+        }
+        return lines.join('')
+      }
     }
   }
 </script>
 
 <style>
-#app .ui .contents .diary {
+/*#app .ui .contents .diary {
   text-indent: 4em;
-  /*font: 'Consolas';
+  font: 'Consolas';
   margin-top: '20em';
-  color: darkslategray;*/
-}
-#app .ui.response {
-  text-indent: '4em';
+  color: darkslategray;
+}*/
+response {
   font: 'Consolas';
   color: darkslategray;
 }

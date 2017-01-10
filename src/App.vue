@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <div id="login-modal" class="ui basic modal">
-      <div class="ui center aligned header">
+      <!--<div class="ui center aligned header">
         Sign in
-      </div>
+      </div>-->
       <div class="ui container center aligned">
+        <h3 class="ui center aligned">Sign in</h3>
+        <br/>
         <div class="actions">
         <button class="ui inverted basic blue labeled icon button" v-on:click="onSignInClick()">
           <i class="twitter icon"/>Start
@@ -249,7 +251,7 @@ export default {
 
 <style>
 #app {
-  margin-top: 5em;
+  margin-top: 5%;
   margin-bottom: 5em;
 }
 #app .ui.dividing.header {
