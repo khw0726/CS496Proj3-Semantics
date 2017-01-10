@@ -16,9 +16,9 @@
       <div v-html="myArticle.response.replace(/\n\r?/g, '<br/>')" class="ui contents response">
         <!--<p>{{ myArticle.response }}</p>-->
       </div>
-      <div class="ui contents">
+      <!--<div class="ui contents">
         {{myArticle.keywords}} {{myArticle.sentiment}}
-      </div>
+      </div>-->
       <div class="ui divider"/>
       <div class="rtbutton">
         <button id="rtb" class="ui circular right floated labeled icon basic twitter button" v-on:click="retweet(myArticle.contents, myArticle.response)">
