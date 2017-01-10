@@ -17,7 +17,7 @@ npm run build
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-###Inner Structure
+##Inner Structure
 
 Vue.js(Front) + Node.js(Server) + Firebase(DB)
 
@@ -31,6 +31,6 @@ Server -> To solve the problem about CORS
 
 Used 'Node-oauth' in Github for authentication
 
-#### Inapp Photos
+## Inapp Photos
 
 Inapp photos exists inside the "inapp_photos.zip" file
