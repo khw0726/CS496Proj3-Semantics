@@ -37,8 +37,8 @@ len=diary.length+response.length;
 var oauth = new OAuth.OAuth(
       'https://api.twitter.com/oauth/request_token',
       'https://api.twitter.com/oauth/access_token',
-      '7VfKo4tn3t9Xxx2Kky0ab7yqi',      //App consumer key for twitter
-      'ZoCq6apXgSgQzr89bB5b8o4VORHS68Uwgr69WxaBvqirEWXRmH',     //App secret key for twitter
+      '',      //App consumer key for twitter
+      '',     //App secret key for twitter
       '1.0A',
       null,
       'HMAC-SHA1'
